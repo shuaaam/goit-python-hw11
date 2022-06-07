@@ -96,11 +96,10 @@ class Record:
         return "Birth date not added"
 
 class AddressBook(UserDict):
-    def __init__(self, n):
+
+    def __iter__(self, n):
         self.n = n
         self.count = 0
-
-    def __iter__(self):
         return self
 
     def __next__(self):
@@ -108,7 +107,8 @@ class AddressBook(UserDict):
         if self.count > self.n:
             raise StopIteration
         else:
-            return
+            for i in self.data:
+                yield self.data[i]
 
     def add_record(self, record: Record):
         self.data[record.name.value] = record
